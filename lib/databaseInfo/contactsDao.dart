@@ -12,4 +12,15 @@ class Contactsdao{
           satir["contacts_id"], satir["contacts_name"], satir["contacts_number"]);
     });
 }
+
+  Future<void> addContacts(String contacts_name, int contacts_number) async {
+    var db = await DatabaseInformation.databaseAccess();
+
+    var information = Map<String, dynamic>();
+    information["contacts_name"] = contacts_name;
+    information["contacts_number"] = contacts_number;
+
+    await db.insert("contacts", information);
+  }
+
 }
