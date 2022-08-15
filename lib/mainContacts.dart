@@ -27,7 +27,7 @@ class _MainContactsState extends State<MainContacts> {
                 icon: Icon(CupertinoIcons.phone_circle_fill, color: Colors.green,size: 40,),
               ),
               Tab(
-                icon: Icon(CupertinoIcons.profile_circled,color: Colors.blueAccent, size: 40,),
+                icon: Icon(CupertinoIcons.profile_circled,color: Color(0xFf0178c8), size: 40,),
               )
             ],
           ),
