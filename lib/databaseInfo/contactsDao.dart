@@ -23,4 +23,19 @@ class Contactsdao{
     await db.insert("contacts", information);
   }
 
+  Future<void> updateContacts(int contacts_id, String contacts_name, int contacts_number) async {
+    var db = await DatabaseInformation.databaseAccess();
+
+    var information = Map<String, dynamic>();
+    information["contacts_name"] = contacts_name;
+    information["contacts_number"] = contacts_number;
+
+    await db.update("contacts", information, where: "contacts_id=?", whereArgs: [contacts_id]);
+  }
+
+
+  Future<void> deleteContacts(int contacts_id) async {
+    var db = await DatabaseInformation.databaseAccess();
+    await db.delete("contacts", where: "contacts_id=?", whereArgs: [contacts_id]);
+  }
 }
