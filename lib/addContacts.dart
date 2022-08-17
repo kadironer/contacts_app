@@ -55,7 +55,7 @@ class _AddContactsState extends State<AddContacts> {
                 height: 60,
                 child: TextField(
                   keyboardType: TextInputType.name,
-                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z á-ú Á-Ú]"))],
+                  inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))],
                   controller: tfContactsName,
                   style: TextStyle(
                     fontSize: 20.0

@@ -1,7 +1,9 @@
 import 'package:contacts_app/addContacts.dart';
 import 'package:contacts_app/contacts.dart';
 import 'package:contacts_app/databaseInfo/contactsDao.dart';
+import 'package:contacts_app/detailsContacts.dart';
 import 'package:flutter/material.dart';
+
 
 class Users extends StatefulWidget {
   const Users({Key? key}) : super(key: key);
@@ -31,7 +33,7 @@ class _UsersState extends State<Users> {
                 var contact=contactsList[index];
                 return GestureDetector(
                   onTap:(){
-                    //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> DetailsContacts(detailsCT: detailsCT)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsContacts(contact: contact)));
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0),
