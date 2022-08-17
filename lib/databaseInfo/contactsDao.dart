@@ -38,4 +38,16 @@ class Contactsdao{
     var db = await DatabaseInformation.databaseAccess();
     await db.delete("contacts", where: "contacts_id=?", whereArgs: [contacts_id]);
   }
+
+
+  Future<List<Contacts>> searchContacts(String arananKelime) async{
+    var db = await DatabaseInformation.databaseAccess();
+    List<Map<String,dynamic>> maps= await db.rawQuery("SELECT * FROM contacts WHERE contacts_name like '%$arananKelime%'");
+    return List.generate(maps.length, (index){
+      var information=maps[index];
+
+      return Contacts(information["contacts_id"], information["contacts_name"], information["contacts_number"]);
+
+    });
+  }
 }

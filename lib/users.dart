@@ -3,6 +3,7 @@ import 'package:contacts_app/contacts.dart';
 import 'package:contacts_app/databaseInfo/contactsDao.dart';
 import 'package:contacts_app/detailsContacts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
 class Users extends StatefulWidget {
@@ -19,11 +20,45 @@ class _UsersState extends State<Users> {
     return contactsList;
   }
 
+  bool aramaYap=false;
+  var arananKelime='';
+
+  Future<List<Contacts>> contactsSearch(String arananKelime) async{
+    var contactsList= await Contactsdao().searchContacts(arananKelime);
+    return contactsList;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: SizedBox(
+          height: 50,
+          child: TextField(
+            onChanged:(searchResult){
+              setState(() {
+                arananKelime=searchResult;
+              });
+            },
+            inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-z A-Z á-ú Á-Ú]"))],
+            style: TextStyle(
+                fontSize: 20.0
+            ),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(top: 2.0),
+              hintText: "Kişi Ara",
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0)
+              )
+            ),
+          ),
+        ),
+      ),
       body: FutureBuilder<List<Contacts>>(
-        future: allContactsShow(),
+        future: aramaYap ? contactsSearch(arananKelime) : allContactsShow(),
         builder: (context, snapshot){
           if(snapshot.hasData){
             var contactsList=snapshot.data;
